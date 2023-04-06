@@ -2,9 +2,9 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Divider } from "react-native-elements";
 import { Image } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { products } from "../../datas";
-const ProfileSale = () => {
+const ProfileSale = ({ navigation }) => {
   return (
     <ScrollView
       style={styles.profileSaleContainer}
@@ -138,7 +138,7 @@ const ProfileSale = () => {
       <PageDivider />
       <MyUtilities />
       <PageDivider />
-      <ReBuyPart />
+      <ReBuyPart navigation={navigation} />
       <PageDivider />
       <StartSelling />
       <PageDivider />
@@ -357,7 +357,11 @@ const MyUtilities = () => {
   );
 };
 
-const ReBuyPart = () => {
+const ReBuyPart = (props) => {
+  const { navigation } = props;
+  function handleProductClick(productId) {
+    navigation.navigate("ProductDetailsScreen", { productId });
+  }
   return (
     <View style={styles.reBuyContainer}>
       <View
@@ -402,64 +406,72 @@ const ReBuyPart = () => {
         showsHorizontalScrollIndicator={false}
       >
         {products.map((product, index) => (
-          <View
-            style={[
-              styles.productCard,
-              {
-                borderWidth: 1,
-                borderColor: "#ccc",
-                marginLeft: 10,
-                marginTop: 10,
-              },
-            ]}
+          <TouchableOpacity
             key={index}
+            activeOpacity={0.8}
+            onPress={() => {
+              handleProductClick(product.id);
+              console.log(product.id);
+            }}
           >
-            <Image
-              source={{
-                uri: product.imageUrl,
-              }}
-              style={{ width: 120, height: 120 }}
-            />
             <View
-              style={{
-                width: "100%",
-                padding: 5,
-              }}
+              style={[
+                styles.productCard,
+                {
+                  borderWidth: 1,
+                  borderColor: "#ccc",
+                  marginLeft: 10,
+                  marginTop: 10,
+                },
+              ]}
             >
-              <Text style={{ fontSize: 11, color: "gray", marginTop: 10 }}>
-                Đã mua 1 lần
-              </Text>
+              <Image
+                source={{
+                  uri: product.imageUrl,
+                }}
+                style={{ width: 120, height: 120 }}
+              />
               <View
                 style={{
-                  flexDirection: "row",
-                  alignContent: "center",
-                  justifyContent: "space-between",
-                  marginTop: 10,
+                  width: "100%",
+                  padding: 5,
                 }}
               >
-                <Text style={{ color: "#FA5252", fontSize: 11 }}>
-                  đ{product.price}
+                <Text style={{ fontSize: 11, color: "gray", marginTop: 10 }}>
+                  Đã mua 1 lần
                 </Text>
                 <View
                   style={{
-                    width: 20,
-                    height: 20,
-                    backgroundColor: "#FA5252",
-                    borderRadius: 50,
-                    padding: 3,
-                    alignItems: "center",
+                    flexDirection: "row",
+                    alignContent: "center",
+                    justifyContent: "space-between",
+                    marginTop: 10,
                   }}
                 >
-                  <Image
-                    source={{
-                      uri: "https://img.icons8.com/ios/50/FFFFFF/shopping-cart--v1.png",
+                  <Text style={{ color: "#FA5252", fontSize: 11 }}>
+                    đ{product.price}
+                  </Text>
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      backgroundColor: "#FA5252",
+                      borderRadius: 50,
+                      padding: 3,
+                      alignItems: "center",
                     }}
-                    style={{ width: 12, height: 12 }}
-                  />
+                  >
+                    <Image
+                      source={{
+                        uri: "https://img.icons8.com/ios/50/FFFFFF/shopping-cart--v1.png",
+                      }}
+                      style={{ width: 12, height: 12 }}
+                    />
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>

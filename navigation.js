@@ -9,6 +9,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import MessageScreen from "./screens/MessageScreen";
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
+import ProductDetailsScreen from "./screens/ProductDetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,7 @@ const Navigate = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="LoginScreen"
+        initialRouteName="ProductDetailsScreen"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
@@ -27,6 +28,7 @@ const Navigate = () => {
           component={NotificationScreen}
         />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="ProductDetailsScreen" component={ProductDetailsScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="MessageScreen" component={MessageScreen} />

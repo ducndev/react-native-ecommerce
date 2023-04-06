@@ -22,7 +22,7 @@ const LoginForm = () => {
       >
         <Image
           source={{
-            uri: "https://assets.stickpng.com/thumbs/5900c80316ae4b3fc58f4825.png",
+            uri: "https://1000logos.net/wp-content/uploads/2021/02/Shopee-logo.png",
           }}
           style={{ width: 70, height: 70 }}
         />
