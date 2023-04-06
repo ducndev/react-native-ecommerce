@@ -5,15 +5,15 @@ import ProductDetailsHeader from "../components/productDetails/ProductDetailsHea
 import { useRoute } from "@react-navigation/native";
 import ProductDetailsFooter from "../components/productDetails/ProductDetailsFooter";
 
-const ProductDetailsScreen = () => {
+const ProductDetailsScreen = ({navigation}) => {
   const route = useRoute();
   const {product} = route.params;
 
   return (
-    <SafeAreaView style={styles.productDetailContainer}>
-      <ProductDetailsHeader product={product} />
+    <View style={styles.productDetailContainer}>
+      <ProductDetailsHeader product={product} navigation={navigation}/>
       <ProductDetailsFooter />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -22,7 +22,6 @@ export default ProductDetailsScreen;
 const styles = StyleSheet.create({
   productDetailContainer: {
     flex: 1,
-    padding: 10,
-    position: 'relative'
+    position: 'relative',
   },
 });
