@@ -17,7 +17,7 @@ const Navigate = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="ProductDetailsScreen"
+        initialRouteName="ProfileScreen"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="HomeScreen" component={HomeScreen} />

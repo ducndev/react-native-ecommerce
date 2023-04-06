@@ -3,27 +3,19 @@ import React from "react";
 import { Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const ProductDetailsHeader = ({ navigation }) => {
+const ProductDetailsHeader = ({product}) => {
   return (
     <View style={styles.detailsHeaderContainer}>
       <View style={styles.detailsHeaderIcons}>
         <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
           <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 40,
-              height: 40,
-              backgroundColor: "#ccc",
-              borderRadius: 50,
-            }}
+            style={styles.detailsHeaderIcon}
           >
             <Image
               source={{
                 uri: "https://img.icons8.com/ios/50/FFFFFF/left--v1.png",
               }}
-              style={{ width: 30, height: 30 }}
+              style={{ width: 20, height: 20 }}
             />
           </View>
         </TouchableOpacity>
@@ -40,7 +32,7 @@ const ProductDetailsHeader = ({ navigation }) => {
               source={{
                 uri: "https://img.icons8.com/ios/50/FFFFFF/right2.png",
               }}
-              style={{ width: 25, height: 25 }}
+              style={{ width: 20, height: 20 }}
             />
           </View>
           <View style={styles.detailsHeaderIcon}>
@@ -48,7 +40,7 @@ const ProductDetailsHeader = ({ navigation }) => {
               source={{
                 uri: "https://img.icons8.com/ios/50/FFFFFF/shopping-cart--v1.png",
               }}
-              style={{ width: 25, height: 25 }}
+              style={{ width: 20, height: 20 }}
             />
           </View>
           <View style={styles.detailsHeaderIcon}>
@@ -56,12 +48,15 @@ const ProductDetailsHeader = ({ navigation }) => {
               source={{
                 uri: "https://img.icons8.com/ios/50/FFFFFF/menu-2.png",
               }}
-              style={{ width: 25, height: 25 }}
+              style={{ width: 20, height: 20 }}
             />
           </View>
         </View>
       </View>
-      <View style={styles.productDetailsImage}></View>
+      <View style={styles.productDetailsImage}>
+        <Image source={{uri: product.imageUrl}}  style={{width: "100%", height: 350}}/>
+        <Text>{product.name}</Text>
+      </View>
     </View>
   );
 };
@@ -78,13 +73,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    zIndex: 999,
   },
   detailsHeaderIcon: {
     alignItems: "center",
     justifyContent: "center",
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: 50,
-    backgroundColor: "#ccc",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
   },
 });

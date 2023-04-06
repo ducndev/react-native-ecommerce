@@ -4,6 +4,7 @@ import { Divider } from "react-native-elements";
 import { Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { products } from "../../datas";
+import { useNavigation } from "@react-navigation/native";
 const ProfileSale = ({ navigation }) => {
   return (
     <ScrollView
@@ -138,7 +139,7 @@ const ProfileSale = ({ navigation }) => {
       <PageDivider />
       <MyUtilities />
       <PageDivider />
-      <ReBuyPart navigation={navigation} />
+      <ReBuyPart products={products}/>
       <PageDivider />
       <StartSelling />
       <PageDivider />
@@ -357,10 +358,12 @@ const MyUtilities = () => {
   );
 };
 
-const ReBuyPart = (props) => {
-  const { navigation } = props;
-  function handleProductClick(productId) {
-    navigation.navigate("ProductDetailsScreen", { productId });
+const ReBuyPart = ({products}) => {
+
+  const navigation = useNavigation();
+  
+  function navigateToProductDetail(product) {
+    navigation.navigate("ProductDetailsScreen", { product });
   }
   return (
     <View style={styles.reBuyContainer}>
@@ -410,8 +413,7 @@ const ReBuyPart = (props) => {
             key={index}
             activeOpacity={0.8}
             onPress={() => {
-              handleProductClick(product.id);
-              console.log(product.id);
+              navigateToProductDetail(product);
             }}
           >
             <View
