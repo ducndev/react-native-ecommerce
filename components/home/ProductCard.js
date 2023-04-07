@@ -38,7 +38,6 @@ const ProductCard = ({ products }) => {
                     style: "currency",
                     currency: "VND",
                   })}{" "}
-                  đ
                 </Text>
                 <Text style={{ fontSize: 10 }}>
                   Đã bán{" "}

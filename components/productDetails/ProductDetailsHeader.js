@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native";
 import { Divider } from "react-native-elements";
-
+import PageDivider from "../PageDivider";
+import { Button } from "react-native";
 const testCategories = [
   {
     id: 1,
@@ -54,12 +55,6 @@ const ProductDetailsHeader = ({ product, navigation }) => {
 
   const handleOpenMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleOutsidePress = () => {
-    if(isMenuOpen) {
-      setIsMenuOpen(false);
-    }
   };
 
   return (
@@ -125,8 +120,12 @@ const ProductDetailsHeader = ({ product, navigation }) => {
       <DetailsHeaderChooseCategories
         isCategoryChoose={isCategoryChoose}
         handleChooseCategories={handleChooseCategories}
-        handleOutsidePress={handleOutsidePress}
       />
+      <PageDivider />
+      <DetailsProductInfo product={product} />
+      <PageDivider />
+      <ShopPolicies />
+      <ShopInfo />
     </View>
   );
 };
@@ -183,44 +182,305 @@ const DetailsHeaderChooseCategories = ({
   );
 };
 
-const DetailsDropdownMenu = ({ isMenuOpen, handleOutsidePress }) => {
+const DetailsDropdownMenu = ({ isMenuOpen }) => {
   return (
     <View style={styles.detailsDropdownMenu}>
       {isMenuOpen && (
-        <TouchableWithoutFeedback onPress={() => console.log("presses")}>
-          <View style={{ flexDirection: "column" }}>
-            <View style={{ flexDirection: "row", gap: 20, padding: 10 }}>
-              <Image
-                source={{
-                  uri: "https://img.icons8.com/ios/50/737373/shopping-bag--v1.png",
-                }}
-                style={{ width: 20, height: 20 }}
-              />
-              <Text>Trở về trang chủ</Text>
-            </View>
-            <Divider />
-            <View style={{ flexDirection: "row", gap: 20, padding: 10 }}>
-              <Image
-                source={{
-                  uri: "https://img.icons8.com/ios/50/737373/info--v1.png",
-                }}
-                style={{ width: 20, height: 20 }}
-              />
-              <Text>Tố cáo sản phẩm này</Text>
-            </View>
-            <Divider />
-            <View style={{ flexDirection: "row", gap: 20, padding: 10 }}>
-              <Image
-                source={{
-                  uri: "https://img.icons8.com/ios/50/737373/help--v1.png",
-                }}
-                style={{ width: 20, height: 20 }}
-              />
-              <Text>Bạn cần trợ giúp gì?</Text>
+        <View style={{ flexDirection: "column" }}>
+          <View style={{ flexDirection: "row", gap: 20, padding: 10 }}>
+            <Image
+              source={{
+                uri: "https://img.icons8.com/ios/50/737373/shopping-bag--v1.png",
+              }}
+              style={{ width: 20, height: 20 }}
+            />
+            <Text>Trở về trang chủ</Text>
+          </View>
+          <Divider />
+          <View style={{ flexDirection: "row", gap: 20, padding: 10 }}>
+            <Image
+              source={{
+                uri: "https://img.icons8.com/ios/50/737373/info--v1.png",
+              }}
+              style={{ width: 20, height: 20 }}
+            />
+            <Text>Tố cáo sản phẩm này</Text>
+          </View>
+          <Divider />
+          <View style={{ flexDirection: "row", gap: 20, padding: 10 }}>
+            <Image
+              source={{
+                uri: "https://img.icons8.com/ios/50/737373/help--v1.png",
+              }}
+              style={{ width: 20, height: 20 }}
+            />
+            <Text>Bạn cần trợ giúp gì?</Text>
+          </View>
+        </View>
+      )}
+    </View>
+  );
+};
+
+const DetailsProductInfo = ({ product }) => {
+  return (
+    <View style={styles.detailsProductInfo}>
+      <View>
+        <Text style={{ fontSize: 14 }}>{product.name}</Text>
+        <View style={{ flexDirection: "column" }}>
+          <Text style={{ color: "#FD7E14", fontSize: 15, marginTop: 15 }}>
+            {" "}
+            {product.price.toLocaleString("vn-VND", {
+              style: "currency",
+              currency: "VND",
+            })}{" "}
+            -{" "}
+            {(product.price + 20000).toLocaleString("vn-VND", {
+              style: "currency",
+              currency: "VND",
+            })}{" "}
+          </Text>
+          <View style={{ flexDirection: "row", gap: 20, marginTop: 3 }}>
+            <Text
+              style={{
+                color: "gray",
+                textDecorationLine: "line-through",
+                fontSize: 15,
+              }}
+            >
+              {(150000).toLocaleString("vn-VND", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </Text>
+            <View
+              style={{
+                width: 60,
+                height: 20,
+                borderWidth: 1,
+                borderColor: "red",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 5,
+              }}
+            >
+              <Text style={{ fontSize: 11 }}>Giảm 10%</Text>
             </View>
           </View>
-        </TouchableWithoutFeedback>
-      )}
+        </View>
+      </View>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Image
+            source={{
+              uri: "https://img.icons8.com/ios-filled/100/FD7E14/star--v1.png",
+            }}
+            style={{ width: 15, height: 15 }}
+          />
+          <Image
+            source={{
+              uri: "https://img.icons8.com/ios-filled/100/FD7E14/star--v1.png",
+            }}
+            style={{ width: 15, height: 15 }}
+          />
+          <Image
+            source={{
+              uri: "https://img.icons8.com/ios-filled/100/FD7E14/star--v1.png",
+            }}
+            style={{ width: 15, height: 15 }}
+          />
+          <Image
+            source={{
+              uri: "https://img.icons8.com/ios-filled/100/FD7E14/star--v1.png",
+            }}
+            style={{ width: 15, height: 15 }}
+          />
+          <Image
+            source={{
+              uri: "https://img.icons8.com/ios-filled/100/FD7E14/star-half-empty.png",
+            }}
+            style={{ width: 15, height: 15 }}
+          />
+        </View>
+        <Text>4.6</Text>
+        <Divider orientation="vertical" />
+        <View>
+          <Text>
+            Đã bán{" "}
+            {product.sold > 1000
+              ? product.sold.toString().slice(0, 1) + "k"
+              : product.sold}
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            marginRight: 10,
+            gap: 10,
+            width: "30%",
+          }}
+        >
+          <TouchableOpacity>
+            <Image
+              source={{
+                uri: "https://img.icons8.com/ios/50/787878/hearts--v1.png",
+              }}
+              style={{ width: 25, height: 25 }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              source={{
+                uri: "https://img.icons8.com/ios/50/787878/right2.png",
+              }}
+              style={{ width: 25, height: 25 }}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const ShopPolicies = () => {
+  return (
+    <View style={styles.shopPolicies}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          height: 45,
+          gap: 20,
+        }}
+      >
+        <Image
+          source={{
+            uri: "https://img.icons8.com/ios/50/22C3E6/free-shipping.png",
+          }}
+          style={{ width: 20, height: 20 }}
+        />
+        <Text>Miễn phí vận chuyển</Text>
+      </View>
+      <Divider orientation="vertical" />
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: 20,
+          height: 50,
+        }}
+      >
+        <Image
+          source={{
+            uri: "https://img.icons8.com/ios/50/737373/airplane-take-off.png",
+          }}
+          style={{ width: 20, height: 20 }}
+        />
+        <View style={{ flexDirection: "column" }}>
+          <Text>Vận chuyển Oversea</Text>
+          <Text>Phí vận chuyển: 0đ</Text>
+        </View>
+      </View>
+      <Divider orientation="horizontal" />
+      <View
+        style={{
+          flexDirection: "row",
+          gap: 20,
+          alignItems: "center",
+          height: 50,
+          backgroundColor: "#FFEFE2",
+        }}
+      >
+        <Image
+          source={{
+            uri: "https://img.icons8.com/ios/50/FD7E14/shield-with-a-dollar-sign.png",
+          }}
+          style={{ width: 20, height: 20 }}
+        />
+        <View>
+          <Text>ZShop đảm bảo</Text>
+          <Text>3 ngày trả hàng / hoàn tiền</Text>
+        </View>
+      </View>
+      <PageDivider />
+    </View>
+  );
+};
+
+const ShopInfo = () => {
+  return (
+    <View style={styles.shopInfo}>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
+        <View>
+          <Image
+            source={{
+              uri: "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png",
+            }}
+            style={{
+              width: 60,
+              height: 60,
+              resizeMode: "cover",
+              borderRadius: 50,
+            }}
+          />
+        </View>
+        <View style={{ flexDirection: "column", gap: 3 }}>
+          <Text style={{ fontWeight: "bold", fontSize: 14 }}>
+            liamaimelecroissant
+          </Text>
+          <Text style={{ fontSize: 12, color: "gray" }}>
+            Online 1 phút trước
+          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+            <Image
+              source={{
+                uri: "https://img.icons8.com/ios/50/737373/marker--v1.png",
+              }}
+              style={{ width: 15, height: 15 }}
+            />
+            <Text style={{ fontSize: 12, color: "gray" }}>Hà Nội</Text>
+          </View>
+        </View>
+        <View style={{ marginLeft: 50 }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "transparent",
+              borderWidth: 1,
+              borderColor: "#FD7E14",
+              fontSize: 12,
+              padding: 5,
+            }}
+            activeOpacity={0.8}
+          >
+            <Text style={{ color: "#FD7E14" }}>Xem shop</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "80%",
+          marginTop: 10,
+        }}
+      >
+        <Text style={{ fontSize: 12 }}>
+          <Text style={{ color: "#FD7E14", fontWeight: "bold" }}>333</Text> Sản
+          phẩm
+        </Text>
+        <Text style={{ fontSize: 12 }}>
+          <Text style={{ color: "#FD7E14", fontWeight: "bold" }}>4.7</Text> đánh
+          giá
+        </Text>
+        <Text style={{ fontSize: 12 }}>
+          <Text style={{ color: "#FD7E14", fontWeight: "bold" }}>100%</Text>{" "}
+          phản hồi chat
+        </Text>
+      </View>
     </View>
   );
 };
@@ -257,5 +517,15 @@ const styles = StyleSheet.create({
     top: 70,
     zIndex: 99999,
     borderRadius: 10,
+  },
+  detailsProductInfo: {
+    padding: 5,
+  },
+  shopPolicies: {
+    padding: 5,
+  },
+  shopInfo: {
+    padding: 10,
+    marginBottom: 100,
   },
 });

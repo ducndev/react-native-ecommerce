@@ -451,7 +451,10 @@ const ReBuyPart = ({products}) => {
                   }}
                 >
                   <Text style={{ color: "#FA5252", fontSize: 11 }}>
-                    đ{product.price}
+                  {product.price.toLocaleString("vn-VND", {
+                    style: "currency",
+                    currency: "VND",
+                  })}{" "}
                   </Text>
                   <View
                     style={{
