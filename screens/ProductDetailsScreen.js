@@ -12,7 +12,7 @@ const ProductDetailsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.productDetailContainer}>
-      <ScrollView >
+      <ScrollView showsVerticalScrollIndicator={false}>
         <ProductDetailsHeader product={product} navigation={navigation} />
       </ScrollView>
       <ProductDetailsFooter />

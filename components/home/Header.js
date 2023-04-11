@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Search from "./Search";
 
-const Header = () => {
+const Header = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
@@ -18,13 +18,32 @@ const Header = () => {
       <View>
         <Search />
         <View style={styles.headerIconsContainer}>
-          <TouchableOpacity>
-            <Image
-              source={{
-                uri: "https://img.icons8.com/ios/50/FFFFFF/shopping-cart--v1.png",
-              }}
-              style={[styles.headerIcon]}
-            />
+          <TouchableOpacity onPress={() => navigation.navigate("CartScreen")}>
+            <View style={{position: 'relative'}}>
+              <Image
+                source={{
+                  uri: "https://img.icons8.com/ios/50/FFFFFF/shopping-cart--v1.png",
+                }}
+                style={[styles.headerIcon]}
+              />
+              <View
+                style={{
+                  backgroundColor: "red",
+                  width: 20,
+                  height: 20,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: 50,
+                  borderWidth: 1,
+                  borderColor: "#fff",
+                  position: 'absolute',
+                  right: -10,
+                  top: -10
+                }}
+              >
+                <Text style={{ color: "#fff", fontSize: 12 }}>9</Text>
+              </View>
+            </View>
           </TouchableOpacity>
           <View style={{ position: "relative" }}>
             <TouchableOpacity>

@@ -10,7 +10,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.homeContainer}>
       <View style={{ position: "relative" }}>
-        <Header />
+        <Header navigation={navigation} />
         <Hero />
         <Content />
       </View>

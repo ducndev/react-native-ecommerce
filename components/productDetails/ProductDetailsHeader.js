@@ -6,6 +6,7 @@ import { ScrollView } from "react-native";
 import { Divider } from "react-native-elements";
 import PageDivider from "../PageDivider";
 import { Button } from "react-native";
+import ProductCard from "./ProductCard";
 const testCategories = [
   {
     id: 1,
@@ -126,6 +127,8 @@ const ProductDetailsHeader = ({ product, navigation }) => {
       <PageDivider />
       <ShopPolicies />
       <ShopInfo />
+      <PageDivider />
+      <RelatedProducts />
     </View>
   );
 };
@@ -485,6 +488,24 @@ const ShopInfo = () => {
   );
 };
 
+const RelatedProducts = ({product}) => {
+  return(
+    <View style={styles.relatedProducts}>
+      <View>
+        <Text style={{color: '#FD7E14', fontSize: 15, fontWeight: 'bold'}}>Sản phẩm liên quan</Text>
+      </View>
+      <View>
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+      </View>
+    </View>
+  )
+}
+
 export default ProductDetailsHeader;
 
 const styles = StyleSheet.create({
@@ -526,6 +547,11 @@ const styles = StyleSheet.create({
   },
   shopInfo: {
     padding: 10,
-    marginBottom: 100,
+    backgroundColor: 'white',
   },
+  relatedProducts: {
+    backgroundColor: '#fff',
+    padding: 10,
+    marginBottom: 100,
+  }
 });
